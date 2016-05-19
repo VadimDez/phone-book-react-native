@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 class phoneBookReactNative extends Component {
@@ -27,12 +28,15 @@ class phoneBookReactNative extends Component {
 
   renderContactRow(data) {
     return (
-      <View>
-        <Text>Contact {data}</Text>
+      <View style={styles.contactRow}>
+        <Image style={styles.contactImage} />
+        <View style={styles.contactInfo}>
+          <Text>Contact {data}</Text>
+        </View>
       </View>
     );
   }
-  
+
   render() {
     return (
       <ListView
@@ -45,25 +49,24 @@ class phoneBookReactNative extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
   listView: {
     paddingTop: 20,
   },
+  contactRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: 'green'
+  },
+  contactImage: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'red'
+  },
+  contactInfo: {
+    margin: 5
+  }
 });
 
 AppRegistry.registerComponent('phoneBookReactNative', () => phoneBookReactNative);
