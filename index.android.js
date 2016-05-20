@@ -8,44 +8,70 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ListView,
+  Image
 } from 'react-native';
 
 class phoneBookReactNative extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+        enableEmptySections: false
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows([1, 2, 3])
+    });
+  }
+
+  renderContactRow(data) {
+    return (
+      <View style={styles.contactRow}>
+        <Image style={styles.contactImage} />
+        <View style={styles.contactInfo}>
+          <Text>Contact {data}</Text>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderContactRow}
+        style={styles.listView}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  listView: {
+    paddingTop: 20,
+  },
+  contactRow: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'green'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  contactImage: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'red'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  contactInfo: {
+    margin: 5
+  }
 });
 
 AppRegistry.registerComponent('phoneBookReactNative', () => phoneBookReactNative);
