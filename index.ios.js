@@ -21,17 +21,33 @@ class phoneBookReactNative extends Component {
   }
 
   componentDidMount() {
+    const img = 'https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg';
+    
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([1, 2, 3])
+      dataSource: this.state.dataSource.cloneWithRows([
+        {
+          id: 1,
+          uri: img
+        },{
+          id: 2,
+          uri: img
+        },{
+          id: 3,
+          uri: img
+        }
+      ])
     });
   }
 
   renderContactRow(data) {
     return (
       <View style={styles.contactRow}>
-        <Image style={styles.contactImage} />
+        <Image
+          source={{uri: data.uri}}
+          style={styles.contactImage}
+        />
         <View style={styles.contactInfo}>
-          <Text>Contact {data}</Text>
+          <Text>Contact {data.id}</Text>
         </View>
       </View>
     );
