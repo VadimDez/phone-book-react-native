@@ -6,7 +6,7 @@ import {
   View,
   ListView,
   Image,
-  NavigatorIOS
+  Navigator
 } from 'react-native';
 
 import Main from './App/Components/main';
@@ -21,14 +21,20 @@ const styles = StyleSheet.create({
 
 class phoneBookReactNative extends Component {
 
+  _renderScene(route, navigator) {
+    if (route.id === 'contacts') {
+      return <Main />
+    }
+  }
+
   render() {
     return (
-      <NavigatorIOS
+      <Navigator
         style={styles.container}
         initialRoute={{
-          title: 'Contacts',
-          component: Main
+          id: 'contacts'
         }}
+        renderScene={this._renderScene}
       />
     )
   }
