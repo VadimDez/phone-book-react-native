@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Main from './App/Components/main';
+import Contact from './App/Components/Contact';
 
 
 const styles = StyleSheet.create({
@@ -23,7 +24,11 @@ class phoneBookReactNative extends Component {
 
   _renderScene(route, navigator) {
     if (route.id === 'contacts') {
-      return <Main />
+      return <Main navigator={navigator} />;
+    }
+    
+    if (route.id === 'contact') {
+      return <Contact navigator={navigator} />;
     }
   }
 
@@ -35,6 +40,12 @@ class phoneBookReactNative extends Component {
           id: 'contacts'
         }}
         renderScene={this._renderScene}
+        configureScene={(route) => {
+            if (route.sceneConfig) {
+              return route.sceneConfig;
+            }
+            return Navigator.SceneConfigs.FloatFromRight;
+          }}
       />
     )
   }

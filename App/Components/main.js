@@ -10,7 +10,8 @@ import {
   View,
   ListView,
   Image,
-  NavigatorIOS
+  Navigator,
+  TouchableOpacity
 } from 'react-native';
 
 class Main extends Component {
@@ -46,25 +47,41 @@ class Main extends Component {
   }
 
   renderContactRow(data) {
+    const handlePress = () => {
+      this.props.navigator.push({
+        id: 'contact'
+      });
+    };
+
     return (
-      <View style={styles.contactRow}>
-        <Image
-          source={{uri: data.uri}}
-          style={styles.contactImage}
-        />
-        <View style={styles.contactInfo}>
-          <Text>Contact {data.id}</Text>
+      <TouchableOpacity onPress={handlePress}>
+        <View style={styles.contactRow}>
+          <Image
+            source={{uri: data.uri}}
+            style={styles.contactImage}
+          />
+          <View style={styles.contactInfo}>
+            <Text>Contact {data.id}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
+  }
+
+  renderScene() {
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderContactRow.bind(this)}
+        style={styles.listView}
+      />
+    )
   }
 
   render() {
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderContactRow}
-        style={styles.listView}
+      <Navigator
+        renderScene={this.renderScene.bind(this)}
       />
     );
   }
