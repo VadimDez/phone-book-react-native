@@ -7,20 +7,35 @@ import {
   AppRegistry,
   View,
   Text,
-  Navigator
+  Navigator,
+  StyleSheet,
+  Image
 } from 'react-native';
 
 export default class Contact extends Component {
 
+  constructor() {
+    super();
+
+    this.contact = {};
+  }
+
   renderScene() {
     return (
-      <View>
-        <Text>contact</Text>
+      <View style={styles.view}>
+        <Text>contact information</Text>
+        <Image
+          source={{uri: this.contact.uri}}
+          style={styles.contactImage}
+        />
+        <Text>id: { this.contact.id }</Text>
       </View>
     )
   }
 
   render() {
+    this.contact = this.props.contact;
+
     return (
       <Navigator
         renderScene={this.renderScene.bind(this)}
@@ -28,3 +43,14 @@ export default class Contact extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  view: {
+    paddingTop: 20
+  },
+  contactImage: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'green'
+  }
+});

@@ -24,11 +24,11 @@ class phoneBookReactNative extends Component {
 
   _renderScene(route, navigator) {
     if (route.id === 'contacts') {
-      return <Main navigator={navigator} />;
+      return <Main navigator={navigator} {...route.passProps} />;
     }
     
     if (route.id === 'contact') {
-      return <Contact navigator={navigator} />;
+      return <Contact navigator={navigator} {...route.passProps} />;
     }
   }
 

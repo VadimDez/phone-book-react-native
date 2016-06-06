@@ -49,7 +49,10 @@ class Main extends Component {
   renderContactRow(data) {
     const handlePress = () => {
       this.props.navigator.push({
-        id: 'contact'
+        id: 'contact',
+        passProps: {
+          contact: data || {}
+        }
       });
     };
 
@@ -89,7 +92,7 @@ class Main extends Component {
 
 const styles = StyleSheet.create({
   listView: {
-    // paddingTop: 20,
+    paddingTop: 20,
   },
   contactRow: {
     flex: 1,
