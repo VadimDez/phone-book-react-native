@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import Main from './App/Components/main';
-import Contact from './App/Components/Contact';
+import Contact from './App/Components/contact';
 
 
 const styles = StyleSheet.create({

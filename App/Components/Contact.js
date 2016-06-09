@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Image
 } from 'react-native';
+import NavigationBar from 'react-native-navbar';
 
 export default class Contact extends Component {
 
@@ -18,11 +19,18 @@ export default class Contact extends Component {
     super();
 
     this.contact = {};
+    this.titleConfig = {
+      title: 'Contact'
+    }
   }
 
   renderScene() {
     return (
       <View style={styles.view}>
+        <NavigationBar
+          leftButton={{ title: 'Back', handler: () => { this.props.navigator.pop(); } }}
+          title={this.titleConfig}
+        />
         <Text>contact information</Text>
         <Image
           source={{uri: this.contact.uri}}
@@ -46,7 +54,7 @@ export default class Contact extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    paddingTop: 20
+    flex: 1
   },
   contactImage: {
     width: 50,

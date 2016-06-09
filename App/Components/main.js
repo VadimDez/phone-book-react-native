@@ -13,6 +13,7 @@ import {
   Navigator,
   TouchableOpacity
 } from 'react-native';
+import NavigationBar from 'react-native-navbar';
 
 class Main extends Component {
 
@@ -25,6 +26,10 @@ class Main extends Component {
         enableEmptySections: false
       })
     }
+
+    this.titleConfig = {
+      title: 'Contacts'
+    };
   }
 
   componentDidMount() {
@@ -73,11 +78,14 @@ class Main extends Component {
 
   renderScene() {
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderContactRow.bind(this)}
-        style={styles.listView}
-      />
+      <View style={styles.view}>
+        <NavigationBar title={this.titleConfig} />
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderContactRow.bind(this)}
+          style={styles.listView}
+        />
+      </View>
     )
   }
 
@@ -91,8 +99,10 @@ class Main extends Component {
 }
 
 const styles = StyleSheet.create({
+  view: {
+    flex: 1
+  },
   listView: {
-    paddingTop: 20,
   },
   contactRow: {
     flex: 1,
