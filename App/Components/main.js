@@ -20,12 +20,10 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-        enableEmptySections: false
-      })
-    };
+    this.dataSource = new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2,
+      enableEmptySections: false
+    });
 
     this.titleConfig = {
       title: 'Contacts'
@@ -33,11 +31,6 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const state = this.context.store.getState();
-
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(state.main.contacts)
-    });
   }
 
   renderContactRow(data) {
@@ -66,11 +59,14 @@ class Main extends Component {
   }
 
   renderScene() {
+    const state = this.context.store.getState();
+    this.dataSource = this.dataSource.cloneWithRows(state.main.contacts);
+
     return (
       <View style={styles.view}>
         <NavigationBar title={this.titleConfig} />
         <ListView
-          dataSource={this.state.dataSource}
+          dataSource={ this.dataSource }
           renderRow={this.renderContactRow.bind(this)}
           style={styles.listView}
         />
