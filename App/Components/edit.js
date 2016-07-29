@@ -28,7 +28,6 @@ export default class Edit extends Component {
   }
 
   renderScene() {
-    let data = 'asd'
     return (
       <View>
         <NavigationBar

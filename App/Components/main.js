@@ -120,4 +120,8 @@ const styles = StyleSheet.create({
   }
 });
 
+Main.contextTypes = {
+  store: React.PropTypes.object
+};
+
 export default Main
