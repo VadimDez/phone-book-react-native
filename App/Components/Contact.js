@@ -30,6 +30,12 @@ export default class Contact extends Component {
         <NavigationBar
           leftButton={{ title: 'Back', handler: () => { this.props.navigator.pop(); } }}
           title={this.titleConfig}
+          rightButton={{ title: 'Edit', handler: () => {
+            this.props.navigator.push({
+              id: 'edit',
+              passProps: {}
+            });
+          }}}
         />
         <Text>contact information</Text>
         <Image
@@ -59,6 +65,6 @@ const styles = StyleSheet.create({
   contactImage: {
     width: 50,
     height: 50,
-    backgroundColor: 'green'
+    backgroundColor: '#e3e3e3'
   }
 });

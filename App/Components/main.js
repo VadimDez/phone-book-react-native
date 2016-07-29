@@ -25,7 +25,7 @@ class Main extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
         enableEmptySections: false
       })
-    }
+    };
 
     this.titleConfig = {
       title: 'Contacts'
@@ -108,13 +108,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: 'green'
+    alignItems: 'center'
   },
   contactImage: {
     width: 50,
     height: 50,
-    backgroundColor: 'red'
+    backgroundColor: '#e3e3e3'
   },
   contactInfo: {
     margin: 5
