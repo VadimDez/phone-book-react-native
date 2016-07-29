@@ -33,21 +33,10 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const img = 'https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg';
+    const state = this.context.store.getState();
 
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([
-        {
-          id: 1,
-          uri: img
-        },{
-          id: 2,
-          uri: img
-        },{
-          id: 3,
-          uri: img
-        }
-      ])
+      dataSource: this.state.dataSource.cloneWithRows(state.main.contacts)
     });
   }
 
