@@ -14,6 +14,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import NavigationBar from 'react-native-navbar';
+import { SET_ACTIVE_CONTACT } from './../../actionTypes';
 
 class Main extends Component {
 
@@ -35,16 +36,17 @@ class Main extends Component {
 
   renderContactRow(data) {
     const handlePress = () => {
-      this.props.navigator.push({
-        id: 'contact',
-        passProps: {
-          contact: data || {}
-        }
+
+      this.context.store.dispatch({
+        type: SET_ACTIVE_CONTACT,
+        contact: data
       });
+
+      this.props.navigator.push({ id: 'contact' });
     };
 
     return (
-      <TouchableOpacity onPress={handlePress}>
+      <TouchableOpacity onPress={ handlePress }>
         <View style={styles.contactRow}>
           <Image
             source={{uri: data.uri}}

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import NavigationBar from 'react-native-navbar';
 
-export default class Contact extends Component {
+class Contact extends Component {
 
   constructor() {
     super();
@@ -50,7 +50,7 @@ export default class Contact extends Component {
   }
 
   render() {
-    this.contact = this.props.contact;
+    this.contact = this.context.store.getState().main.activeContact;
 
     return (
       <Navigator
@@ -70,3 +70,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#e3e3e3'
   }
 });
+
+Contact.contextTypes = {
+  store: React.PropTypes.object
+};
+
+export default Contact
