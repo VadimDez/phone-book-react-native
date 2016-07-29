@@ -34,12 +34,12 @@ class Main extends Component {
   componentDidMount() {
   }
 
-  renderContactRow(data) {
+  renderContactRow(contact) {
     const handlePress = () => {
 
       this.context.store.dispatch({
         type: SET_ACTIVE_CONTACT,
-        contact: data
+        contact: contact
       });
 
       this.props.navigator.push({ id: 'contact' });
@@ -47,13 +47,13 @@ class Main extends Component {
 
     return (
       <TouchableOpacity onPress={ handlePress }>
-        <View style={styles.contactRow}>
+        <View style={ styles.contactRow }>
           <Image
-            source={{uri: data.uri}}
+            source={{ uri: contact.uri }}
             style={styles.contactImage}
           />
-          <View style={styles.contactInfo}>
-            <Text>Contact {data.id}</Text>
+          <View style={ styles.contactInfo }>
+            <Text>{ contact.name }</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -69,8 +69,8 @@ class Main extends Component {
         <NavigationBar title={this.titleConfig} />
         <ListView
           dataSource={ this.dataSource }
-          renderRow={this.renderContactRow.bind(this)}
-          style={styles.listView}
+          renderRow={ this.renderContactRow.bind(this) }
+          style={ styles.listView }
         />
       </View>
     )

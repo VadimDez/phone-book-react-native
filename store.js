@@ -10,14 +10,17 @@ const initialState = {
   contacts: [
     {
       id: 1,
+      name: 'A',
       uri: defaultImage
     },
     {
       id: 2,
+      name: 'B',
       uri: defaultImage
     },
     {
       id: 3,
+      name: 'C',
       uri: defaultImage
     }
   ],

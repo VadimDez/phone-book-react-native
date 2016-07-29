@@ -20,34 +20,44 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Edit extends Component {
+class Edit extends Component {
 
   constructor(props) {
     super(props);
     this.contact = {};
   }
 
+  goBackHandler() {
+    this.props.navigator.pop();
+  }
+
   renderScene() {
     return (
       <View>
         <NavigationBar
-          leftButton={{ title: 'Back', handler: () => { this.props.navigator.pop(); } }}
+          leftButton={{ title: 'Back', handler: this.goBackHandler.bind(this) }}
           title={{title: 'Edit'}}
         />
-        <Text>Edit view</Text>
+        <Text>Edit name</Text>
         <TextInput
           style={ styles.textInput }
-          value={ '' + this.contact.id }
+          value={ this.contact.name }
         />
       </View>
     )
   }
 
   render() {
-    this.contact = this.props.contact;
+    this.contact = this.context.store.getState().main.activeContact;
 
     return (
       <Navigator renderScene={ this.renderScene.bind(this) } />
     )
   }
 }
+
+Edit.contextTypes = {
+  store: React.PropTypes.object
+};
+
+export default Edit;

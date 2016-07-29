@@ -24,25 +24,28 @@ class Contact extends Component {
     }
   }
 
+  goBackHandler() {
+    this.props.navigator.pop();
+  }
+
+  editHandler() {
+    this.props.navigator.push({
+      id: 'edit'
+    });
+  }
+
   renderScene() {
     return (
       <View style={styles.view}>
         <NavigationBar
-          leftButton={{ title: 'Back', handler: () => { this.props.navigator.pop(); } }}
+          leftButton={{ title: 'Back', handler: this.goBackHandler.bind(this) }}
           title={this.titleConfig}
-          rightButton={{ title: 'Edit', handler: () => {
-            this.props.navigator.push({
-              id: 'edit',
-              passProps: {
-                contact: this.contact
-              }
-            });
-          }}}
+          rightButton={{ title: 'Edit', handler: this.editHandler.bind(this) }}
         />
         <Text>contact information</Text>
         <Image
-          source={{uri: this.contact.uri}}
-          style={styles.contactImage}
+          source={{ uri: this.contact.uri }}
+          style={ styles.contactImage }
         />
         <Text>id: { this.contact.id }</Text>
       </View>
