@@ -33,7 +33,9 @@ export default class Contact extends Component {
           rightButton={{ title: 'Edit', handler: () => {
             this.props.navigator.push({
               id: 'edit',
-              passProps: {}
+              passProps: {
+                contact: this.contact
+              }
             });
           }}}
         />
