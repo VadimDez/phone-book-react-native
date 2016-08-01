@@ -16,6 +16,8 @@ import {
 import NavigationBar from 'react-native-navbar';
 import { SET_ACTIVE_CONTACT } from './../../actionTypes';
 
+const defaultImage = 'https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg';
+
 class Main extends Component {
 
   constructor(props) {

@@ -35,6 +35,12 @@ const main = (state = initialState, action) => {
     })
   }
 
+  if (action.type === actionTypes.ADD_CONTACT) {
+    return Object.assign({}, state, {
+      contacts: [...state.contacts, action.value]
+    });
+  }
+
   return state;
 };
 
