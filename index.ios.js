@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import Main from './App/Components/main';
 import Contact from './App/Components/contact';
 import Edit from './App/Components/edit';
+import New from './App/Components/new';
 import store from './store';
 
 
@@ -36,6 +37,10 @@ class phoneBookReactNative extends Component {
 
     if (route.id === 'edit') {
       return <Edit navigator={navigator} {...route.passProps} />
+    }
+
+    if (route.id === 'new') {
+      return <New navigator={navigator} {...route.passProps} />
     }
   }
 

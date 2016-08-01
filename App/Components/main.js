@@ -60,13 +60,20 @@ class Main extends Component {
     );
   }
 
+  addNewHandler() {
+    this.props.navigator.push({ id: 'new' });
+  }
+
   renderScene() {
     const state = this.context.store.getState();
     this.dataSource = this.dataSource.cloneWithRows(state.main.contacts);
 
     return (
       <View style={styles.view}>
-        <NavigationBar title={this.titleConfig} />
+        <NavigationBar
+          title={this.titleConfig}
+          rightButton={{ title: '+', handler: this.addNewHandler.bind(this) }}
+        />
         <ListView
           dataSource={ this.dataSource }
           renderRow={ this.renderContactRow.bind(this) }
