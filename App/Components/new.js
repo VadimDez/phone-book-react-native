@@ -31,19 +31,32 @@ const styles = StyleSheet.create({
   }
 });
 
+const defaultContact = {
+  name: '',
+  number: '',
+  uri: 'https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg'
+};
+
 class New extends Component {
+  constructor(props) {
+    super(props);
+
+    this.contact = defaultContact;
+  }
+
   backHandler() {
     this.props.navigator.pop();
   }
 
-  addHandler() {
+  updateValue(field) {
+    return (value) => {
+      this.contact[field] = value;
+    };
+  }
 
-    this.props.onCreateNewContact({
-      id: 100,
-      name: 'asd',
-      number: 123123123,
-      uri: 'https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg'
-    });
+  addHandler() {
+    this.props.onCreateNewContact(this.contact);
+    this.contact = defaultContact;
     this.props.navigator.pop();
   }
 
@@ -57,15 +70,19 @@ class New extends Component {
         />
         <Text>Name</Text>
         <TextInput
+          onChangeText={ this.updateValue('name').bind(this) }
           keyboardType={'default'}
           style={ styles.input }
         />
 
         <Text>Number</Text>
+        <WithLabel label="none">
         <TextInput
+          onChangeText={ this.updateValue('number').bind(this) }
           keyboardType={'numeric'}
           style={ styles.input }
         />
+        </WithLabel>
       </View>
     )
   }
