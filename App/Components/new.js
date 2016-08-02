@@ -76,13 +76,11 @@ class New extends Component {
         />
 
         <Text>Number</Text>
-        <WithLabel label="none">
         <TextInput
           onChangeText={ this.updateValue('number').bind(this) }
           keyboardType={'numeric'}
           style={ styles.input }
         />
-        </WithLabel>
       </View>
     )
   }
@@ -93,10 +91,6 @@ class New extends Component {
     )
   }
 }
-
-New.contextTypes = {
-  store: React.PropTypes.object
-};
 
 New.propTypes = {
   onCreateNewContact: React.PropTypes.func.isRequired

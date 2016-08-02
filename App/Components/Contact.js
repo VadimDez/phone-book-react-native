@@ -12,16 +12,12 @@ import {
   Image
 } from 'react-native';
 import NavigationBar from 'react-native-navbar';
+import { connect } from 'react-redux';
 
 class Contact extends Component {
 
   constructor() {
     super();
-
-    this.contact = {};
-    this.titleConfig = {
-      title: 'Contact'
-    }
   }
 
   goBackHandler() {
@@ -35,26 +31,25 @@ class Contact extends Component {
   }
 
   renderScene() {
+    console.log(this.props.contact);
     return (
       <View style={styles.view}>
         <NavigationBar
           leftButton={{ title: 'Back', handler: this.goBackHandler.bind(this) }}
-          title={this.titleConfig}
+          title={{ title: 'Contact' }}
           rightButton={{ title: 'Edit', handler: this.editHandler.bind(this) }}
         />
         <Text>contact information</Text>
         <Image
-          source={{ uri: this.contact.uri }}
+          source={{ uri: this.props.contact.uri }}
           style={ styles.contactImage }
         />
-        <Text>id: { this.contact.id }</Text>
+        <Text>id: { this.props.contact.id }</Text>
       </View>
     )
   }
 
   render() {
-    this.contact = this.context.store.getState().main.activeContact;
-
     return (
       <Navigator
         renderScene={this.renderScene.bind(this)}
@@ -74,8 +69,14 @@ const styles = StyleSheet.create({
   }
 });
 
-Contact.contextTypes = {
-  store: React.PropTypes.object
+const mapStateToProps = (state) => {
+  return {
+    contact: state.main.activeContact
+  };
 };
 
-export default Contact
+const ContactConnected = connect(
+  mapStateToProps
+)(Contact);
+
+export default ContactConnected;
