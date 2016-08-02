@@ -39,12 +39,16 @@ class Contact extends Component {
           title={{ title: 'Contact' }}
           rightButton={{ title: 'Edit', handler: this.editHandler.bind(this) }}
         />
-        <Text>contact information</Text>
-        <Image
-          source={{ uri: this.props.contact.uri }}
-          style={ styles.contactImage }
-        />
-        <Text>id: { this.props.contact.id }</Text>
+        <View style={ styles.container }>
+          <Image
+            source={{ uri: this.props.contact.uri }}
+            style={ styles.contactImage }
+          />
+          <View style={ styles.contactInfo }>
+            <Text>Number: { this.props.contact.number }</Text>
+            <Text>Name: { this.props.contact.name }</Text>
+          </View>
+        </View>
       </View>
     )
   }
@@ -62,9 +66,16 @@ const styles = StyleSheet.create({
   view: {
     flex: 1
   },
+  container: {
+    flexDirection: 'row'
+  },
+  containerInfo: {
+    flexDirection: 'column'
+  },
   contactImage: {
     width: 50,
     height: 50,
+    marginRight: 20,
     backgroundColor: '#e3e3e3'
   }
 });
