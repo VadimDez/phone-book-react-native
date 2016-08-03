@@ -40,7 +40,11 @@ const main = (state = initialState, action) => {
 
   if (action.type === actionTypes.UPDATE_ACTIVE_CONTACT) {
     return Object.assign({}, state, {
-      activeContact: Object.assign({}, state.activeContact, { object: { [action.key]: action.value } })
+      activeContact: Object.assign({}, state.activeContact, {
+        object: Object.assign({}, state.activeContact.object, {
+          [action.key]: action.value
+        })
+      })
     });
   }
 
