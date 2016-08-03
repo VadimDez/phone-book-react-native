@@ -31,10 +31,10 @@ class Contact extends Component {
   }
 
   renderScene() {
-    console.log(this.props.contact);
     return (
       <View style={styles.view}>
         <NavigationBar
+          style={ styles.navBar }
           leftButton={{ title: 'Back', handler: this.goBackHandler.bind(this) }}
           title={{ title: 'Contact' }}
           rightButton={{ title: 'Edit', handler: this.editHandler.bind(this) }}
@@ -63,6 +63,10 @@ class Contact extends Component {
 }
 
 const styles = StyleSheet.create({
+  navBar: {
+    borderBottomColor: '#e3e3e3',
+    borderBottomWidth: 1,
+  },
   view: {
     flex: 1
   },
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    contact: state.main.activeContact
+    contact: state.main.activeContact.object
   };
 };
 

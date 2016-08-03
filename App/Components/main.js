@@ -36,12 +36,13 @@ class Main extends Component {
   componentDidMount() {
   }
 
-  renderContactRow(contact) {
+  renderContactRow(contact, _, index) {
     const handlePress = () => {
 
       this.context.store.dispatch({
         type: SET_ACTIVE_CONTACT,
-        contact: contact
+        contact,
+        index: parseInt(index, 10)
       });
 
       this.props.navigator.push({ id: 'contact' });
@@ -73,7 +74,8 @@ class Main extends Component {
     return (
       <View style={styles.view}>
         <NavigationBar
-          title={this.titleConfig}
+          style={ styles.navBar }
+          title={ this.titleConfig }
           rightButton={{ title: '+', handler: this.addNewHandler.bind(this) }}
         />
         <ListView
@@ -97,6 +99,10 @@ class Main extends Component {
 const styles = StyleSheet.create({
   view: {
     flex: 1
+  },
+  navBar: {
+    borderBottomColor: '#e3e3e3',
+    borderBottomWidth: 1,
   },
   listView: {
   },

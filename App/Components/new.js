@@ -18,6 +18,10 @@ import { connect } from 'react-redux';
 import { ADD_CONTACT } from './../../actionTypes';
 
 const styles = StyleSheet.create({
+  navBar: {
+    borderBottomColor: '#e3e3e3',
+    borderBottomWidth: 1,
+  },
   view: {
     paddingLeft: 10,
     paddingRight: 10
@@ -62,25 +66,28 @@ class New extends Component {
 
   renderScene() {
     return (
-      <View style={ styles.view }>
+      <View>
         <NavigationBar
+          style={ styles.navBar }
           leftButton={{ title: 'Back', handler: this.backHandler.bind(this) }}
           title={{ title: 'New Contact' }}
           rightButton={{ title: 'Add', handler: this.addHandler.bind(this) }}
         />
-        <Text>Name</Text>
-        <TextInput
-          onChangeText={ this.updateValue('name').bind(this) }
-          keyboardType={'default'}
-          style={ styles.input }
-        />
+        <View style={ styles.view }>
+          <Text>Name</Text>
+          <TextInput
+            onChangeText={ this.updateValue('name').bind(this) }
+            keyboardType={'default'}
+            style={ styles.input }
+          />
 
-        <Text>Number</Text>
-        <TextInput
-          onChangeText={ this.updateValue('number').bind(this) }
-          keyboardType={'numeric'}
-          style={ styles.input }
-        />
+          <Text>Number</Text>
+          <TextInput
+            onChangeText={ this.updateValue('number').bind(this) }
+            keyboardType={'numeric'}
+            style={ styles.input }
+          />
+        </View>
       </View>
     )
   }

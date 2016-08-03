@@ -28,13 +28,29 @@ const main = (state = initialState, action) => {
 
   if (action.type === actionTypes.SET_ACTIVE_CONTACT) {
     return Object.assign({}, state, {
-      activeContact: action.contact
+      activeContact: { object: Object.assign({}, action.contact), index: action.index }
     })
   }
 
   if (action.type === actionTypes.ADD_CONTACT) {
     return Object.assign({}, state, {
       contacts: [...state.contacts, action.value]
+    });
+  }
+
+  if (action.type === actionTypes.UPDATE_ACTIVE_CONTACT) {
+    return Object.assign({}, state, {
+      activeContact: Object.assign({}, state.activeContact, { object: { [action.key]: action.value } })
+    });
+  }
+
+  if (action.type === actionTypes.UPDATE_CONTACT) {
+    return Object.assign({}, state, {
+      contacts: [
+        ...state.contacts.slice(0, action.index),
+        Object.assign({}, state.contacts[action.index], state.activeContact.object),
+        ...state.contacts.slice(action.index + 1)
+      ]
     });
   }
 
