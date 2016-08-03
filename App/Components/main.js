@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   AppRegistry,
   StyleSheet,
@@ -16,8 +17,6 @@ import {
 } from 'react-native';
 import NavigationBar from 'react-native-navbar';
 import { SET_ACTIVE_CONTACT } from './../../actionTypes';
-
-const defaultImage = 'https://www.bankofenglandearlycareers.co.uk/media/2747/blank-profile.jpg';
 
 class Main extends Component {
 
@@ -40,11 +39,7 @@ class Main extends Component {
   renderContactRow(contact, _, index) {
     const handlePress = () => {
 
-      this.context.store.dispatch({
-        type: SET_ACTIVE_CONTACT,
-        contact,
-        index: parseInt(index, 10)
-      });
+      this.props.setActiveContact(contact, parseInt(index, 10));
 
       this.props.navigator.push({ id: 'contact' });
     };
@@ -69,8 +64,7 @@ class Main extends Component {
   }
 
   renderScene() {
-    const state = this.context.store.getState();
-    this.dataSource = this.dataSource.cloneWithRows(state.main.contacts);
+    this.dataSource = this.dataSource.cloneWithRows(this.props.contacts);
 
     return (
       <View style={styles.view}>
@@ -141,10 +135,27 @@ const styles = StyleSheet.create({
   }
 });
 
-Main.contextTypes = {
-  store: React.PropTypes.object
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.main.contacts
+  };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setActiveContact: (contact, index) => {
+      dispatch({
+        type: SET_ACTIVE_CONTACT,
+        contact,
+        index
+      })
+    }
+  };
+};
 
+const MainConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);
 
-export default Main
+export default MainConnected
