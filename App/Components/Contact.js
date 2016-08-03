@@ -34,6 +34,7 @@ class Contact extends Component {
     return (
       <View style={styles.view}>
         <NavigationBar
+          statusBar={{ hideAnimation: 'none', showAnimation: 'none' }}
           style={ styles.navBar }
           leftButton={{ title: 'Back', handler: this.goBackHandler.bind(this) }}
           title={{ title: 'Contact' }}
@@ -45,8 +46,8 @@ class Contact extends Component {
             style={ styles.contactImage }
           />
           <View style={ styles.contactInfo }>
-            <Text>Number: { this.props.contact.number }</Text>
             <Text>Name: { this.props.contact.name }</Text>
+            <Text>Number: { this.props.contact.number }</Text>
           </View>
         </View>
       </View>

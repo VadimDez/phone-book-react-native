@@ -7,6 +7,7 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  TextInput,
   View,
   ListView,
   Image,
@@ -78,6 +79,12 @@ class Main extends Component {
           title={ this.titleConfig }
           rightButton={{ title: '+', handler: this.addNewHandler.bind(this) }}
         />
+        <View style={ styles.searchContainer }>
+          <TextInput
+            style={ styles.searchField }
+            placeholder={ 'Search' }
+          />
+        </View>
         <ListView
           dataSource={ this.dataSource }
           renderRow={ this.renderContactRow.bind(this) }
@@ -104,6 +111,18 @@ const styles = StyleSheet.create({
     borderBottomColor: '#e3e3e3',
     borderBottomWidth: 1,
   },
+  searchContainer: {
+    padding: 5,
+    backgroundColor: '#eeeeee'
+  },
+  searchField: {
+    height: 20,
+    borderColor: '#e3e3e3',
+    borderWidth: 1,
+    padding: 5,
+    fontSize: 13,
+    backgroundColor: '#ffffff'
+  },
   listView: {
   },
   contactRow: {
@@ -125,5 +144,7 @@ const styles = StyleSheet.create({
 Main.contextTypes = {
   store: React.PropTypes.object
 };
+
+
 
 export default Main

@@ -21,7 +21,8 @@ const initialState = {
       uri: defaultImage
     }
   ],
-  activeContact: null
+  activeContact: null,
+  search: ''
 };
 
 const main = (state = initialState, action) => {
