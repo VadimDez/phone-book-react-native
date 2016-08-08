@@ -59,6 +59,12 @@ const main = (state = initialState, action) => {
     });
   }
 
+  if (action.type === actionTypes.UPDATE_SEARCH) {
+    return Object.assign({}, state, {
+      search: action.value
+    });
+  }
+
   return state;
 };
 

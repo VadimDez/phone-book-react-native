@@ -16,7 +16,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import NavigationBar from 'react-native-navbar';
-import { SET_ACTIVE_CONTACT } from './../../actionTypes';
+import { SET_ACTIVE_CONTACT, UPDATE_SEARCH } from './../../actionTypes';
 
 class Main extends Component {
 
@@ -27,10 +27,6 @@ class Main extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
       enableEmptySections: false
     });
-
-    this.titleConfig = {
-      title: 'Contacts'
-    };
   }
 
   componentDidMount() {
@@ -63,27 +59,43 @@ class Main extends Component {
     this.props.navigator.push({ id: 'new' });
   }
 
+  handleUpdateSearch(value) {
+    this.props.updateSearch(value);
+  }
+
   renderScene() {
+    let listViewStyles = styles.listView;
+    let noContacts = <View></View>;
+    let listView = <View></View>;
     this.dataSource = this.dataSource.cloneWithRows(this.props.contacts);
 
+    if (!this.props.contacts.length) {
+      noContacts = <View style={ styles.noContacts }><Text>No contacts</Text></View>;
+    } else {
+      listView = <ListView
+        dataSource={ this.dataSource }
+        renderRow={ this.renderContactRow.bind(this) }
+        style={ styles.listView }
+      />;
+    }
+
     return (
-      <View style={styles.view}>
+      <View style={ styles.view }>
         <NavigationBar
           style={ styles.navBar }
-          title={ this.titleConfig }
+          title={{ title: 'Contacts' }}
           rightButton={{ title: '+', handler: this.addNewHandler.bind(this) }}
         />
         <View style={ styles.searchContainer }>
           <TextInput
             style={ styles.searchField }
             placeholder={ 'Search' }
+            value={ this.props.search }
+            onChangeText={ this.handleUpdateSearch.bind(this) }
           />
         </View>
-        <ListView
-          dataSource={ this.dataSource }
-          renderRow={ this.renderContactRow.bind(this) }
-          style={ styles.listView }
-        />
+        { listView }
+        { noContacts }
       </View>
     )
   }
@@ -132,12 +144,24 @@ const styles = StyleSheet.create({
   },
   contactInfo: {
     margin: 5
+  },
+  noContacts: {
+    paddingTop: 20,
+    flex: 1,
+    alignItems: 'center'
   }
 });
 
 const mapStateToProps = (state) => {
   return {
-    contacts: state.main.contacts
+    contacts: state.main.contacts.filter(contact => {
+      if (!state.main.search || !state.main.search.length) {
+        return true;
+      }
+
+      return contact.name.toLowerCase().indexOf(state.main.search.toLowerCase()) >= 0;
+    }),
+    search: state.main.search
   };
 };
 
@@ -148,6 +172,12 @@ const mapDispatchToProps = (dispatch) => {
         type: SET_ACTIVE_CONTACT,
         contact,
         index
+      })
+    },
+    updateSearch: value => {
+      dispatch({
+        type: UPDATE_SEARCH,
+        value
       })
     }
   };
