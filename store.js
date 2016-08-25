@@ -10,15 +10,18 @@ const initialState = {
   contacts: [
     {
       name: 'A',
-      uri: defaultImage
+      uri: defaultImage,
+      number: 123123123
     },
     {
       name: 'B',
-      uri: defaultImage
+      uri: defaultImage,
+      number: 111111111
     },
     {
       name: 'C',
-      uri: defaultImage
+      uri: defaultImage,
+      number: 55555555
     }
   ],
   activeContact: null,
