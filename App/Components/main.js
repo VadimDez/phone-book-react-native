@@ -84,7 +84,7 @@ class Main extends Component {
         <NavigationBar
           style={ styles.navBar }
           title={{ title: 'Contacts' }}
-          rightButton={{ title: '+', handler: this.addNewHandler.bind(this) }}
+          rightButton={{ tintColor: '#000', title: '+', handler: this.addNewHandler.bind(this) }}
         />
         <View style={ styles.searchContainer }>
           <TextInput
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   navBar: {
     borderBottomColor: '#e3e3e3',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1
   },
   searchContainer: {
     padding: 5,
@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
   contactImage: {
     width: 50,
     height: 50,
-    backgroundColor: '#e3e3e3'
+    backgroundColor: '#e3e3e3',
+    borderRadius: 25
   },
   contactInfo: {
     margin: 5
